@@ -41,6 +41,7 @@
 
 #include <vector>
 #include <map>
+#include <istream>
 
 class ciUICanvas : public ciUIWidget
 {    
@@ -51,7 +52,8 @@ public:
 		for(unsigned int i = 0; i < widgets.size(); i++)
 		{
 			ciUIWidget *w = widgets[i]; 
-			delete w; 
+			delete w;
+            
 		}
 		widgets.clear();             
     }
@@ -524,10 +526,10 @@ public:
 	//Mouse Callbacks
     void enableMouseEventCallbacks()
     {
-		mCbMouseDown = mApp->getWindow()->getSignalMouseDown().connect( std::bind( &ciUICanvas::canvasMouseDown, this, std::_1 ) );
-		mCbMouseUp = mApp->getWindow()->getSignalMouseUp().connect( std::bind( &ciUICanvas::canvasMouseUp, this, std::_1 ) );
-		mCbMouseMove = mApp->getWindow()->getSignalMouseMove().connect( std::bind( &ciUICanvas::canvasMouseMove, this, std::_1 ) );
-		mCbMouseDrag = mApp->getWindow()->getSignalMouseDrag().connect( std::bind( &ciUICanvas::canvasMouseDrag, this, std::_1 ) );
+		mCbMouseDown = mApp->getWindow()->getSignalMouseDown().connect( std::bind( &ciUICanvas::canvasMouseDown, this, std::placeholders::_1 ) );
+		mCbMouseUp = mApp->getWindow()->getSignalMouseUp().connect( std::bind( &ciUICanvas::canvasMouseUp, this, std::placeholders::_1 ) );
+		mCbMouseMove = mApp->getWindow()->getSignalMouseMove().connect( std::bind( &ciUICanvas::canvasMouseMove, this, std::placeholders::_1 ) );
+		mCbMouseDrag = mApp->getWindow()->getSignalMouseDrag().connect( std::bind( &ciUICanvas::canvasMouseDrag, this, std::placeholders::_1 ) );
     }
 
 	//Mouse Callbacks
@@ -542,8 +544,8 @@ public:
     //KeyBoard Callbacks
 	void enableKeyEventCallbacks()
 	{
-		mCbKeyDown = mApp->getWindow()->getSignalKeyDown().connect( std::bind( &ciUICanvas::canvasKeyDown, this, std::_1 ) );
-		mCbKeyUp = mApp->getWindow()->getSignalKeyUp().connect( std::bind( &ciUICanvas::canvasKeyUp, this, std::_1 ) );
+		mCbKeyDown = mApp->getWindow()->getSignalKeyDown().connect( std::bind( &ciUICanvas::canvasKeyDown, this, std::placeholders::_1 ) );
+		mCbKeyUp = mApp->getWindow()->getSignalKeyUp().connect( std::bind( &ciUICanvas::canvasKeyUp, this, std::placeholders::_1 ) );
 	}
 
 	//KeyBoard Callbacks
